@@ -957,11 +957,11 @@ module ActiveResource
             case from = options[:from]
             when Symbol
               response = get(from, options[:params])
-              instantiate_collection(response, options[:params], response)
+              instantiate_collection(response, options[:params], {}, response)
             when String
               path = "#{from}#{query_string(options[:params])}"
               response = connection.get(path, headers)
-              instantiate_collection(format.decode(response.body) || [], options[:params], response)
+              instantiate_collection(format.decode(response.body) || [], options[:params], {}, response)
             else
               prefix_options, query_options = split_options(options[:params])
               path = collection_path(prefix_options, query_options)
